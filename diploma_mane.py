@@ -84,21 +84,3 @@ if __name__ == '__main__':
             dictionary['members_count'] = r['members_count']
             list.append(dictionary)
         json.dump(list, f, indent = 2)
-
-
-
-
-
-
-'''    for group in USER_GROUPS:
-        for friend in FRIENDS:
-            time.sleep(0.3)
-            print('*')
-            response = requests.get(
-                'https://api.vk.com/method/groups.isMember',
-                {'group_id': group,
-                'user_id' : USER_ID,
-                'access_token': TOKEN,
-                'v': 5.103}
-                )
-            print(response.json(), group, friend)'''
