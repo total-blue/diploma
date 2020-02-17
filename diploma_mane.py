@@ -2,7 +2,8 @@ from urllib.parse import urlencode
 import requests
 import time
 import json
-
+from clint.textui import colored, puts
+import random
 
 #adress = 'eshmargunov'
 app_id = 7315243
@@ -51,8 +52,8 @@ def getUserGroups(id):
 
 def getXorGroups(groups, friends):
     res = user_groups[:]
-    for i, group in enumerate(user_groups):
-        print(f'\r {i / (len(friends) / 100)}', end='')
+    for group in user_groups:
+        puts(getattr(colored, random.choice(colored.COLORS))('\rProcessing...'), newline=False)
         while True:
             try:
                 response = requests.get(
@@ -82,6 +83,7 @@ def dumper(filename='groups.json'):
         for group in res:
             while True:
                 try:
+                    puts(getattr(colored, random.choice(colored.COLORS))('\rProcessing...'), newline=False)
                     response = requests.get(
                         'https://api.vk.com/method/groups.getById',
                         {'access_token': token,
@@ -108,3 +110,4 @@ if __name__ == '__main__':
     user_groups = getUserGroups(user_id)
     res = getXorGroups(user_groups, friends)
     dumper()
+    print('\nDone!')
